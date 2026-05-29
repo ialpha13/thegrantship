@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1219"/>
+      <stop offset="1" stop-color="#0d141c"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="25%" cy="25%" r="60%">
+      <stop offset="0" stop-color="#4f7dff" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#4f7dff" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="80%" cy="75%" r="60%">
+      <stop offset="0" stop-color="#d18a3d" stop-opacity=".18"/>
+      <stop offset="1" stop-color="#d18a3d" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="noise">
+      <feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="3" stitchTiles="stitch"/>
+      <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 .10 0"/>
+    </filter>
+    <pattern id="grid" width="80" height="80" patternUnits="userSpaceOnUse">
+      <path d="M80 0H0V80" fill="none" stroke="rgba(255,255,255,.08)" stroke-width="1"/>
+    </pattern>
+    <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="rgba(255,255,255,.10)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,.04)"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <rect width="1600" height="1000" fill="url(#glowA)"/>
+  <rect width="1600" height="1000" fill="url(#glowB)"/>
+  <rect width="1600" height="1000" fill="url(#grid)" opacity=".30"/>
+  <rect width="1600" height="1000" filter="url(#noise)" opacity=".45"/>
+
+  <text x="800" y="590" text-anchor="middle"
+        font-family="Inter, system-ui" font-weight="900" font-size="420"
+        fill="rgba(255,255,255,.06)">429</text>
+
+  <g transform="translate(360 250)">
+    <rect x="0" y="0" width="880" height="500" rx="34"
+          fill="url(#glass)" stroke="rgba(255,255,255,.14)" stroke-width="2"/>
+
+    <path d="M34 70H846" stroke="rgba(255,255,255,.10)" stroke-width="2"/>
+    <circle cx="64" cy="45" r="8" fill="rgba(79,125,255,.9)"/>
+    <circle cx="92" cy="45" r="8" fill="rgba(255,255,255,.35)"/>
+    <circle cx="120" cy="45" r="8" fill="rgba(209,138,61,.85)"/>
+
+    <!-- Icon: hourglass -->
+    <g transform="translate(400 135)">
+      <path d="M180 60h220c0 90-70 120-110 150c40 30 110 60 110 150H180c0-90 70-120 110-150c-40-30-110-60-110-150Z"
+            fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.18)" stroke-width="3"/>
+      <path d="M210 110h160" stroke="#4f7dff" stroke-width="10" stroke-linecap="round" opacity=".9"/>
+      <path d="M240 360h100" stroke="#d18a3d" stroke-width="10" stroke-linecap="round" opacity=".9"/>
+      <circle cx="290" cy="280" r="10" fill="#d18a3d" opacity=".9"/>
+    </g>
+
+    <rect x="120" y="390" width="640" height="16" rx="8" fill="rgba(255,255,255,.08)"/>
+    <rect x="120" y="420" width="520" height="14" rx="7" fill="rgba(255,255,255,.06)"/>
+  </g>
+</svg>

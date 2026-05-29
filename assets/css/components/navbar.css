@@ -1,0 +1,417 @@
+/* assets/css/components/navbar.css */
+
+/* Prevent background scroll when mobile menu is open (LOCKED) */
+body.gs-nav-open{
+  overflow: hidden;
+}
+
+.gs-nav{
+  --nav-intro-duration: 900ms;
+  position: fixed;
+  top: 14px;
+  left: 0;
+  right: 0;
+  z-index: 99999;
+
+  transform: translateY(0);
+  transition: transform .26s var(--ease), opacity .26s var(--ease);
+  pointer-events: none;
+}
+
+.gs-nav.is-hidden{
+  transform: translateY(-120%);
+  opacity: .98;
+}
+
+/* =========================================================
+   INTRO STATES
+   - is-intro: left-to-right reveal (logo first)
+   - is-ready: full bar expanded (normal)
+   Controlled by assets/js/components/navbar.js
+========================================================= */
+
+.gs-nav__inner{
+  width: min(1180px, calc(100% - 28px));
+  margin: 0 auto;
+
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 12px 14px;
+  border-radius: 999px;
+
+  /* match 5M+ card glass */
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.10));
+  border: 2px solid rgba(255,255,255,.18);
+  box-shadow: none;
+  outline: 1px solid rgba(0,0,0,.25);
+  outline-offset: -1px;
+
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-clip: padding-box;
+
+  pointer-events: auto;
+  position: relative;
+  overflow: hidden;
+
+  height: 64px;
+  max-height: 64px;
+
+  /* Reveal from left to right without scaling content */
+  transform-origin: left center;
+  clip-path: inset(0 0 0 0);
+
+  transition:
+    clip-path var(--nav-intro-duration, 900ms) cubic-bezier(.25,.8,.2,1),
+    transform var(--nav-intro-duration, 900ms) var(--ease),
+    opacity .5s var(--ease),
+    filter .6s var(--ease),
+    background .26s var(--ease),
+    border-color .26s var(--ease);
+}
+
+/* Intro: left-to-right reveal */
+.gs-nav.is-intro{
+  pointer-events: none; /* prevent clicks during intro */
+}
+.gs-nav.is-intro .gs-nav__inner{
+  clip-path: inset(0 100% 0 0);
+  opacity: 1;
+  transform: translateX(-10px);
+  filter: none;
+}
+
+/* Ready state: normal full nav */
+.gs-nav.is-ready{
+  pointer-events: none;
+}
+.gs-nav.is-ready .gs-nav__inner{
+  justify-content: space-between;
+  opacity: 1;
+  transform: translateX(0);
+  filter: blur(0);
+}
+
+/* During intro, fade in left-to-right */
+.gs-nav__brand,
+.gs-nav__links,
+.gs-nav__toggle{
+  transition: opacity .6s var(--ease), transform .6s var(--ease), filter .6s var(--ease);
+}
+
+.gs-nav.is-intro .gs-nav__brand,
+.gs-nav.is-intro .gs-nav__links,
+.gs-nav.is-intro .gs-nav__toggle{
+  opacity: .85;
+  pointer-events: none;
+  transform: translateX(-12px);
+  filter: none;
+}
+
+/* As it becomes ready, bring elements in with a soft stagger */
+.gs-nav.is-ready .gs-nav__brand{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  filter: blur(0);
+  transition-delay: .05s;
+}
+.gs-nav.is-ready .gs-nav__links{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  filter: blur(0);
+  transition-delay: .18s;
+}
+.gs-nav.is-ready .gs-nav__toggle{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  filter: blur(0);
+  transition-delay: .32s;
+}
+
+/* remove decorative lines for simple glass */
+.gs-nav__inner::before,
+.gs-nav__inner::after{
+  content: none;
+}
+
+/* on scroll: slightly stronger */
+.gs-nav.is-scrolled .gs-nav__inner{
+  background:
+    linear-gradient(135deg, rgba(255,255,255,.22), rgba(255,255,255,.10));
+  border-color: rgba(255,255,255,.18);
+  outline-color: rgba(0,0,0,.25);
+}
+
+/* =========================
+   BRAND / LOGO (clean)
+========================= */
+.gs-nav__brand{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+}
+
+/* FIX: Your markup is <img class="gs-nav__logo">, not a wrapper.
+   So keep it as a plain image. */
+.gs-nav__logo{
+  height: 34px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+}
+
+/* If navbar is tighter on smaller screens */
+@media (max-width: 980px){
+  .gs-nav__logo{ height: 30px; }
+}
+@media (max-width: 420px){
+  .gs-nav__logo{ height: 26px; }
+}
+
+/* =========================
+   DESKTOP LINKS
+========================= */
+.gs-nav__links{
+  display:flex;
+  align-items:center;
+  gap: 8px;
+}
+
+.gs-nav__link{
+  font-weight: 850;
+  font-size: 13px;
+  color: rgba(244,246,250,.82);
+
+  padding: 10px 12px;
+  border-radius: 999px;
+
+  transition: transform .2s var(--ease), background .2s var(--ease), border-color .2s var(--ease);
+  border: 1px solid transparent;
+}
+
+.gs-nav__link:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.07);
+  border-color: rgba(255,255,255,.12);
+}
+
+.gs-nav__link.is-active{
+  background: rgba(255,255,255,.10);
+  border-color: rgba(255,255,255,.16);
+}
+
+.gs-nav__link--cta{
+  border: 1px solid rgba(18,163,120,.28);
+  background: linear-gradient(180deg, rgba(18,163,120,.20), rgba(18,163,120,.08));
+  box-shadow: 0 10px 26px rgba(0,0,0,.30);
+}
+
+/* =========================
+   TOGGLE BUTTON (Mobile)
+========================= */
+.gs-nav__toggle{
+  display:none;
+
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+
+  cursor:pointer;
+  pointer-events: auto;
+
+  padding: 0;
+  transition: transform .18s var(--ease), background .18s var(--ease), border-color .18s var(--ease), box-shadow .18s var(--ease);
+  -webkit-tap-highlight-color: transparent;
+
+  color: rgba(244,246,250,.90);
+  line-height: 1;
+}
+
+.gs-nav__toggle:hover{
+  transform: translateY(-1px);
+  background: transparent;
+}
+
+.gs-nav__toggle:active{
+  transform: translateY(0) scale(.98);
+}
+
+.gs-nav__toggle:focus-visible{
+  outline: none;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,.35);
+}
+
+/* Burger lines (3 spans) */
+.gs-nav__burger{
+  position: relative;
+  width: 18px;
+  height: 14px;
+  display: block;
+}
+
+.gs-nav__burger > span{
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(244,246,250,.92);
+  transform-origin: center;
+  transition:
+    transform .22s var(--ease),
+    opacity .16s var(--ease),
+    top .22s var(--ease),
+    bottom .22s var(--ease),
+    width .22s var(--ease);
+}
+
+.gs-nav__burger > span:nth-child(1){ top: 0; }
+.gs-nav__burger > span:nth-child(2){ top: 6px; width: 78%; }
+.gs-nav__burger > span:nth-child(3){ bottom: 0; }
+
+/* Animation 2: rotate / shift (trigger on button .is-open) */
+.gs-nav__toggle.is-open .gs-nav__burger > span:nth-child(1){
+  top: 6px;
+  transform: rotate(38deg);
+}
+
+.gs-nav__toggle.is-open .gs-nav__burger > span:nth-child(2){
+  opacity: 0;
+  transform: translateX(8px);
+}
+
+.gs-nav__toggle.is-open .gs-nav__burger > span:nth-child(3){
+  bottom: auto;
+  top: 6px;
+  transform: rotate(-38deg);
+}
+
+/* =========================
+   MOBILE PANEL
+========================= */
+.gs-nav__panel{
+  position: fixed;
+  right: 14px;
+  top: calc(14px + 64px);
+  z-index: 999999;
+
+  width: min(320px, 86vw);
+  height: auto;
+  max-height: calc(100dvh - 120px);
+  margin: 0;
+
+  border-radius: 18px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+  border: 2px solid rgba(255,255,255,.18);
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.35);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  opacity: 0;
+  transform: translateX(24px);
+  transform-origin: top right;
+  pointer-events: none;
+  transition: opacity .25s var(--ease), transform .35s var(--ease);
+  overflow: hidden;
+}
+
+/* sheen in mobile panel */
+.gs-nav__panel::before{
+  content:"";
+  position:absolute;
+  inset:-60%;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255,255,255,.18), transparent 60%),
+    radial-gradient(circle at 70% 70%, rgba(79,125,255,.10), transparent 62%);
+  transform: rotate(10deg);
+  opacity: .85;
+  pointer-events:none;
+}
+
+.gs-nav.is-open .gs-nav__panel{
+  opacity: 1;
+  transform: translateX(0);
+  pointer-events: auto;
+}
+
+.gs-nav__panelInner{
+  position: relative;
+  padding: 14px 14px 10px;
+  display:grid;
+  gap: 0;
+}
+
+.gs-nav__panelInner::before{ content: none; }
+
+.gs-nav__mLink,
+.gs-nav__panelInner a{
+  display:block;
+  padding: 12px 8px;
+  border-radius: 12px;
+
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,.10);
+  background: transparent;
+
+  color: rgba(244,246,250,.88);
+  font-weight: 800;
+  letter-spacing: .15px;
+  font-size: 14px;
+
+  transition: transform .18s var(--ease), background .18s var(--ease), color .18s var(--ease);
+}
+
+.gs-nav__mLink:hover,
+.gs-nav__panelInner a:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.10);
+  color: rgba(244,246,250,.96);
+}
+
+/* CTA last link look */
+.gs-nav__panelInner a:last-child{
+  border: 1px solid rgba(255,255,255,.22);
+  background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.10));
+  border-radius: 14px;
+  padding: 12px 12px;
+  margin-top: 10px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 980px){
+  .gs-nav__links{ display:none; }
+  .gs-nav__toggle{ display:inline-flex; align-items:center; justify-content:center; }
+}
+
+/* Reduce motion: avoid intro animation transforms */
+@media (prefers-reduced-motion: reduce){
+  .gs-nav__inner{
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    clip-path: inset(0 0 0 0) !important;
+  }
+  .gs-nav.is-intro .gs-nav__brand,
+  .gs-nav.is-intro .gs-nav__links,
+  .gs-nav.is-intro .gs-nav__toggle{
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}

@@ -1,0 +1,200 @@
+/* assets/css/pages/legal.css
+   Legal pages - typography + UI aligned to Services/Resources
+*/
+
+.gs-legal{
+  padding-top: 110px;
+  padding-bottom: 80px;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background system (same as other pages) */
+.gs-legal-bg{ display:none !important; }
+
+/* Hero header (same type scale as Services/Resources hero) */
+.gs-legal-hero{
+  padding: 18px 0 14px;
+  max-width: 860px;
+  margin: 0 auto;
+  position: relative;
+}
+.gs-legal-hero::after{
+  content: "";
+  display: block;
+  height: 1px;
+  margin-top: 22px;
+  background: linear-gradient(90deg, rgba(209,138,61,.00), rgba(209,138,61,.35), rgba(79,125,255,.22), rgba(209,138,61,.00));
+}
+
+.gs-legal-pill{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  width: fit-content;
+  margin-bottom: 12px;
+
+  font-family: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: 12px;
+  opacity: .92;
+  color: rgba(244,246,250,.88);
+}
+
+.gs-legal-pill__dot{
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(209,138,61,.95);
+  box-shadow: 0 0 18px rgba(209,138,61,.35);
+}
+
+.gs-legal-title{
+  margin: 0 0 10px;
+  font-family: "Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size: clamp(34px, 4.8vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: rgba(244,246,250,.94);
+  text-wrap: balance;
+}
+
+.gs-legal-sub{
+  margin: 0;
+  max-width: 78ch;
+  font-family: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size: 16.5px;
+  line-height: 1.75;
+  opacity: .9;
+  color: rgba(244,246,250,.66);
+}
+
+.gs-legal-meta{
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  align-items: center;
+}
+.gs-legal-meta__item{
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  font-family: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial;
+  font-size: 12.5px;
+  color: rgba(244,246,250,.72);
+}
+.gs-legal-meta__label{
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  font-size: 11px;
+  opacity: .7;
+}
+.gs-legal-meta__value{
+  font-weight: 800;
+  color: rgba(244,246,250,.92);
+}
+
+/* Main glass card (same feel as Services/Resources cards) */
+.gs-legal-card{
+  max-width: 860px;
+  margin: 22px auto 0;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  overflow: visible;
+}
+
+.gs-legal-card__inner{
+  padding: 0;
+}
+
+@media (min-width: 820px){
+  .gs-legal-card__inner{ padding: 0; }
+}
+
+/* Prose */
+.gs-legal-section{
+  padding: 18px 0 18px 14px;
+  border-top: 1px solid rgba(255,255,255,.10);
+  position: relative;
+}
+.gs-legal-section::before{
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 18px;
+  bottom: 18px;
+  width: 2px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, rgba(209,138,61,.65), rgba(79,125,255,.55));
+  opacity: .65;
+}
+.gs-legal-section:first-child{
+  border-top: 0;
+  padding-top: 0;
+}
+.gs-legal-section:first-child::before{
+  top: 0;
+}
+
+.gs-legal-h2{
+  margin: 0 0 8px;
+  font-family: "Space Grotesk", system-ui;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  font-size: 20px;
+  color: rgba(244,246,250,.92);
+}
+
+.gs-legal-p,
+.gs-legal-li{
+  margin: 0 0 10px;
+  font-family: "Manrope", system-ui;
+  font-size: 15.5px;
+  line-height: 1.75;
+  opacity: .92;
+  color: rgba(244,246,250,.66);
+}
+
+.gs-legal-ul{
+  margin: 0;
+  padding-left: 18px;
+}
+.gs-legal-li{ margin-bottom: 8px; }
+
+.gs-legal-strong{
+  color: rgba(244,246,250,.90);
+  font-weight: 850;
+}
+
+.gs-legal-link{
+  color: rgba(79,125,255,.95);
+  text-decoration: none;
+  font-weight: 850;
+}
+.gs-legal-link:hover{
+  text-decoration: underline;
+}
+
+.gs-legal-note{
+  margin-top: 10px;
+  padding: 12px;
+  border-radius: 18px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.10);
+}
+
+.gs-legal-note .gs-legal-p:last-child{ margin-bottom: 0; }

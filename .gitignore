@@ -1,0 +1,12 @@
+/config/config.php
+/.env
+/uploads/
+/assets/img/
+/assets/video/
+/node_modules/
+/vendor/
+*.log
+.DS_Store
+Thumbs.db
+*.zip
+*.tar.gz

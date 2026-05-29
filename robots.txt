@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# Block sensitive / non-public paths
+Disallow: /config/
+Disallow: /partials/
+Disallow: /admin/
+Disallow: /includes/
+Disallow: /uploads/tmp/
+
+# Prevent indexing of success / utility pages
+Disallow: /contact-success.php
+Disallow: /newsletter-success.php
+Disallow: /errors/
+
+# Sitemap location
+Sitemap: https://thegrantship.com/sitemap.xml

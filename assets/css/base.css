@@ -1,0 +1,108 @@
+/* assets/css/base.css */
+
+:root{
+  --display: "Space Grotesk", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --body: "Manrope", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  --ease: cubic-bezier(.2,.8,.2,1);
+
+  /* core palette (portfolio-like) */
+  --ink: rgba(244,246,250,.92);
+  --muted: rgba(244,246,250,.66);
+
+  --bg0: #0d141c;
+  --bg1: #0b1219;
+
+  /* Global background controls */
+  --bg-base: #0b1219;
+  --bg-grad-top: rgba(10,14,20,.92);
+  --bg-grad-bottom: rgba(9,13,19,.99);
+  --bg-glow-blue: rgba(79,125,255,.14);
+  --bg-glow-amber: rgba(209,138,61,.14);
+  --bg-vignette: rgba(0,0,0,.55);
+  --bg-noise-data: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHdpZHRoPScxMjAnIGhlaWdodD0nMTIwJyB2aWV3Qm94PScwIDAgMTIwIDEyMCc+PGZpbHRlciBpZD0nbic+PGZlVHVyYnVsZW5jZSB0eXBlPSdmcmFjdGFsTm9pc2UnIGJhc2VGcmVxdWVuY3k9Jy44JyBudW1PY3RhdmVzPScyJyBzdGl0Y2hUaWxlcz0nc3RpdGNoJy8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9JzEyMCcgaGVpZ2h0PScxMjAnIGZpbHRlcj0ndXJsKCNuKScgb3BhY2l0eT0nLjA2Jy8+PC9zdmc+");
+
+  --glass: rgba(255,255,255,.08);
+  --glassStrong: rgba(255,255,255,.10);
+  --line: rgba(255,255,255,.12);
+  --blur: 18px;
+
+  --mint: #12a378;
+  --amber: #d18a3d;
+  --blue:  #4f7dff;
+  --vio:   #7c5cff;
+
+  --shadow: 0 26px 90px rgba(0,0,0,.45);
+  --shadowSoft: 0 14px 38px rgba(0,0,0,.35);
+
+  --radius-xl: 22px;
+  --radius-lg: 18px;
+  --radius-pill: 999px;
+}
+
+*{ box-sizing:border-box; }
+html, body{ height:100%; }
+html{
+  background-color: var(--bg-base);
+}
+body{
+  margin:0;
+  font-family: var(--body);
+  color: var(--ink);
+  background: transparent;
+  position: relative;
+  z-index: 0;
+  overflow-x: hidden;
+}
+
+/* Global background (fixed, seamless) */
+body::before{
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-color: var(--bg-base);
+  background-image:
+    var(--bg-noise-data),
+    radial-gradient(1200px 800px at 10% -20%, var(--bg-glow-blue), transparent 62%),
+    radial-gradient(1200px 800px at 95% -10%, var(--bg-glow-amber), transparent 62%),
+    radial-gradient(1400px 900px at 50% 110%, var(--bg-vignette), transparent 55%),
+    linear-gradient(180deg, var(--bg-grad-top), var(--bg-grad-bottom));
+  background-repeat: repeat, no-repeat, no-repeat, no-repeat, no-repeat;
+  background-size: 180px 180px, cover, cover, cover, cover;
+  background-position: top left, top left, top right, center bottom, top left;
+}
+
+/* Ambient drift on glow layers */
+@media (prefers-reduced-motion: no-preference){
+  body::before{
+    animation: gs-bg-drift 28s ease-in-out infinite alternate;
+  }
+}
+
+@keyframes gs-bg-drift{
+  0%{
+    background-position: top left, top left, top right, center bottom, top left;
+  }
+  100%{
+    background-position: top left, 12% -6%, 88% -4%, center bottom, top left;
+  }
+}
+
+img{ display:block; max-width:100%; }
+a{ color: inherit; text-decoration: none; }
+button{ font-family: inherit; }
+
+.gs-container{
+  width: min(1180px, calc(100% - 28px));
+  margin: 0 auto;
+}
+
+/* subtle reveal */
+.gs-reveal{ opacity: 1; transform:none; }
+html.js .gs-reveal{
+  opacity: 0;
+  transform: translateY(14px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+html.js .gs-reveal.is-in{ opacity: 1; transform: translateY(0); }
